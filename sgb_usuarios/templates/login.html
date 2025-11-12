@@ -1,0 +1,76 @@
+{% load socialaccount %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Sistema de Biblioteca</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+<body class="bg-light d-flex align-items-center justify-content-center vh-100">
+
+    <div class="container" style="max-width: 380px;">
+        <div class="text-center mb-4">
+            <h2 class="fw-bold text-dark">Entrar</h2>
+        </div>
+
+        <div class="card-body">
+            <!-- Mensagens de erro ou sucesso -->
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <form action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+                <div class="mb-3">
+                    <label for="usuario" class="form-label">Usuário</label>
+                    <input type="text" class="form-control" name="nome_usuario" id="usuario" placeholder="Digite seu usuário" required autofocus>
+                </div>
+
+                <div class="mb-3">
+                    <label for="senha" class="form-label">Senha</label>
+                    <input type="password" class="form-control" name="senha" id="senha" placeholder="Digite sua senha" required>
+                </div>
+
+                <div class="mb-3 d-flex justify-content-end">
+                    <a href="{% url 'password_reset' %}" class="small link-primary link-underline-opacity-0 link-underline-opacity-100-hover">
+                        <i class="bi bi-key me-1"></i>Esqueceu a senha?
+                    </a>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="bi bi-box-arrow-in-right me-2"></i>Entrar
+                </button>
+            </form>
+
+            <div class="d-flex align-items-center my-3">
+                <hr class="flex-grow-1">
+                <span class="mx-2 text-muted small">ou</span>
+                <hr class="flex-grow-1">
+            </div>
+
+            <div class="d-grid gap-2">
+                <a href="/accounts/google/login/" class="btn btn-outline-dark d-flex align-items-center justify-content-center">
+                    <i class="bi bi-google me-2"></i>
+                    Entrar com Google
+                </a>
+            </div>
+
+            <div class="text-center mt-3">
+                <small class="text-muted">
+                    Novo por aqui?
+                    <a href="{% url 'cadastro' %}" class="link-primary link-underline-opacity-0 link-underline-opacity-100-hover">Crie uma conta</a>
+                </small>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-0gSC3fa0Xm3VYRqVQf9pMb6fdCq8GJ8enPXdXprRPPSVJlxQTCwUvvO1KpW7r8K8" crossorigin="anonymous"></script>
+</body>
+</html>

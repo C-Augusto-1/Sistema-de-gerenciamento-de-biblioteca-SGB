@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperação de Senha</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+        }
+        .email-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        .email-header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        .email-header p {
+            margin: 10px 0 0 0;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        .email-body {
+            padding: 40px 30px;
+            color: #333;
+            line-height: 1.6;
+        }
+        .email-body h2 {
+            color: #333;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+        .email-body p {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #666;
+        }
+        .button-container {
+            text-align: center;
+            margin: 35px 0;
+        }
+        .reset-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        .alternative-link {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+        .alternative-link p {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            color: #666;
+        }
+        .alternative-link code {
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 12px;
+            display: block;
+            border-radius: 5px;
+            font-size: 13px;
+            word-break: break-all;
+            color: #333;
+        }
+        .security-info {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 5px;
+        }
+        .security-info p {
+            margin: 0;
+            font-size: 14px;
+            color: #856404;
+        }
+        .security-info strong {
+            color: #856404;
+        }
+        .email-footer {
+            background-color: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+        }
+        .email-footer p {
+            margin: 5px 0;
+            color: #999;
+        }
+        .divider {
+            height: 1px;
+            background-color: #e0e0e0;
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="email-header">
+            <h1>🔐 Recuperação de Senha</h1>
+            <p>Sistema de Gerenciamento de Biblioteca</p>
+        </div>
+
+        <div class="email-body">
+            <h2>Olá, {{ user.get_username }}!</h2>
+            
+            <p>
+                Recebemos uma solicitação para redefinir a senha da sua conta no Sistema de Gerenciamento de Biblioteca.
+            </p>
+
+            <p>
+                Para criar uma nova senha, clique no botão abaixo:
+            </p>
+
+            <div class="button-container">
+                <a href="{{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}" class="reset-button">
+                    Redefinir Minha Senha
+                </a>
+            </div>
+
+            <div class="alternative-link">
+                <p><strong>O botão não está funcionando?</strong></p>
+                <p>Copie e cole o link abaixo no seu navegador:</p>
+                <code>{{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}</code>
+            </div>
+
+            <div class="security-info">
+                <p>
+                    <strong>⚠️ Informações Importantes:</strong><br>
+                    • Este link é válido por 24 horas<br>
+                    • Só pode ser usado uma vez<br>
+                    • Se você não solicitou esta redefinição, ignore este e-mail<br>
+                    • Sua senha atual permanecerá ativa
+                </p>
+            </div>
+
+            <div class="divider"></div>
+
+            <p style="font-size: 14px; color: #999;">
+                Caso tenha alguma dúvida ou precise de ajuda, entre em contato com nossa equipe de suporte.
+            </p>
+        </div>
+
+        <div class="email-footer">
+            <p><strong>Sistema de Gerenciamento de Biblioteca</strong></p>
+            <p>Este é um e-mail automático, por favor não responda.</p>
+            <p style="margin-top: 15px;">© 2025 Todos os direitos reservados</p>
+        </div>
+    </div>
+</body>
+</html>
